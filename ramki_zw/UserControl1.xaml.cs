@@ -70,5 +70,11 @@ namespace ramki_zw
                 Window.GetWindow(this).Close();
             }
         }
+
+        private void Button_dodaj_Click(object sender, RoutedEventArgs e)
+        {
+            Okno_wyboru win2 = new Okno_wyboru();
+            win2.ShowDialog();
+        }
     }
 }

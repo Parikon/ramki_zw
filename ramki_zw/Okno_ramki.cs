@@ -24,7 +24,7 @@ namespace ramki_zw
                 this.VerticalContentAlignment = VerticalAlignment.Stretch;
                 this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 this.WindowStyle = WindowStyle.SingleBorderWindow;
-                this.Topmost = true;
+                //this.Topmost = true;
             }       
 
     }
