@@ -5,6 +5,7 @@ using System.Data.SQLite;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows;
 
 namespace ramki_zw
 {
@@ -55,6 +56,71 @@ namespace ramki_zw
             db_cmd.CommandText = "CREATE TABLE IF NOT EXISTS " + nazwatabeliwersja + " ([Numer wersji]  INT)";
             db_cmd.ExecuteNonQuery();
             this.db_con.Close();
+        }
+
+        //kasuj grid prety
+        public void UsunDaneZTabeli()
+        {
+            this.db_con.Open();
+            SQLiteCommand db_cmd = db_con.CreateCommand();
+            db_cmd.CommandType = CommandType.Text;
+            db_cmd.CommandText = "delete from  " + nazwatabeli + " where [Format] = '" + UserControl1.formatka + "'";
+            db_cmd.ExecuteNonQuery();
+            db_con.Close();
+        }
+
+        public void DodajDaneDoTabeli()
+        {
+            try
+            {
+                this.db_con.Open();
+                SQLiteCommand db_cmd = db_con.CreateCommand();
+                db_cmd.CommandType = CommandType.Text;
+                db_cmd.CommandText = "INSERT INTO " + nazwatabeli + " VALUES ('" + UserControl2.nazwaformatki + "','"
+                                                                      + UserControl2.wysokosc + "','"
+                                                                      + UserControl2.dlugosc + "','"
+                                                                      + UserControl2.G_marg + "','"
+                                                                      + UserControl2.D_marg + "','"
+                                                                      + UserControl2.L_marg + "','"
+                                                                      + UserControl2.P_marg + "')";
+                db_cmd.ExecuteNonQuery();
+                db_con.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "PI-INFO");
+                //Window.GetWindow(this).Close();
+            }
+        }
+
+        public void UpdateDaneWTabeli()
+        {
+            
+            this.db_con.Open();
+            SQLiteCommand db_cmd = db_con.CreateCommand();
+            db_cmd.CommandType = CommandType.Text;
+            string kolumna = "Format";
+            db_cmd.CommandText = "update " + nazwatabeli + " set [" + kolumna + "] = '" + UserControl2.nazwaformatki + "' where [Format] = '" + UserControl1.formatka + "'";
+            db_cmd.ExecuteNonQuery();
+            kolumna = "Wysokość";
+            db_cmd.CommandText = "update " + nazwatabeli + " set [" + kolumna + "] = '" + UserControl2.wysokosc + "' where [Format] = '" + UserControl1.formatka + "'";
+            db_cmd.ExecuteNonQuery();
+            kolumna = "Długość";
+            db_cmd.CommandText = "update " + nazwatabeli + " set [" + kolumna + "] = '" + UserControl2.dlugosc + "' where [Format] = '" + UserControl1.formatka + "'";
+            db_cmd.ExecuteNonQuery();
+            kolumna = "G-marg";
+            db_cmd.CommandText = "update " + nazwatabeli + " set [" + kolumna + "] = '" + UserControl2.G_marg + "' where [Format] = '" + UserControl1.formatka + "'";
+            db_cmd.ExecuteNonQuery();
+            kolumna = "D-marg";
+            db_cmd.CommandText = "update " + nazwatabeli + " set [" + kolumna + "] = '" + UserControl2.D_marg + "' where [Format] = '" + UserControl1.formatka + "'";
+            db_cmd.ExecuteNonQuery();
+            kolumna = "L-marg";
+            db_cmd.CommandText = "update " + nazwatabeli + " set [" + kolumna + "] = '" + UserControl2.L_marg + "' where [Format] = '" + UserControl1.formatka + "'";
+            db_cmd.ExecuteNonQuery();
+            kolumna = "P-marg";
+            db_cmd.CommandText = "update " + nazwatabeli + " set [" + kolumna + "] = '" + UserControl2.P_marg + "' where [Format] = '" + UserControl1.formatka + "'";
+            db_cmd.ExecuteNonQuery();
+            db_con.Close();
         }
 
         public void GetData()

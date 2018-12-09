@@ -10,21 +10,33 @@
         <TabControl >
             <TabItem Header="Ramki">
                 <Grid Background="#FF424B56">
-                    <Button x:Name="button" Margin="256,0,0,10" BorderThickness="3" FontWeight="Bold"  HorizontalAlignment="Left" Width="158" Height="51" VerticalAlignment="Bottom" BorderBrush="White" Background="#FF292929" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="51*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="WaGaCAD © " HorizontalAlignment="Left" Margin="330,-23,0,0" VerticalAlignment="Top" FontStyle="Italic" FontWeight="Bold" Grid.ColumnSpan="2">
+                        <Label.Foreground>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="Black" Offset="0"/>
+                                <GradientStop Color="#FF5B5B5B" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Label.Foreground>
+                    </Label>
+                    <Button x:Name="button" Margin="256,0,0,10" BorderThickness="3" FontWeight="Bold"  HorizontalAlignment="Left" Width="158" Height="51" VerticalAlignment="Bottom" BorderBrush="White" Background="#FF292929" Grid.ColumnSpan="2" >
                         <WrapPanel Height="40.435" Width="104.156">
                             <Image x:Name="image_rysuj_ramke" Height="30.768" Width="32.418" Margin="5,3,0,0"/>
                             <Label Content="Rysuj" Height="27.317" Width="41.355" Margin="22,4,0,0 " Foreground="White"/>
                         </WrapPanel>
                     </Button>
-                    <DataGrid x:Name="dataGrid" Margin="10,10,10,73"/>
-                    <Button x:Name="button_dodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="10,244,0,0" VerticalAlignment="Top" Width="70" Click="Button_dodaj_Click"/>
-                    <Button x:Name="button_usun" Content="Usuń" HorizontalAlignment="Left" Margin="154,244,0,0" VerticalAlignment="Top" Width="64"/>
-                    <Button x:Name="button_zmiana_Copy" Content="Zmień" HorizontalAlignment="Left" Margin="85,244,0,0" VerticalAlignment="Top" Width="64"/>
+                    <DataGrid x:Name="dataGrid" Margin="10,10,10,73" SelectionChanged="DataGrid_SelectionChanged" Grid.ColumnSpan="2"/>
+                    <Button x:Name="button_dodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="10,244,0,0" VerticalAlignment="Top" Width="70" Click="Button_dodaj_Click" Background="Black" BorderBrush="#FFFFFCFC" Foreground="White"/>
+                    <Button x:Name="button_usun" Content="Usuń" HorizontalAlignment="Left" Margin="154,244,0,0" VerticalAlignment="Top" Width="64" Click="Button_usun_Click" Background="Black" Foreground="#FFFFF5F5" BorderBrush="#FFFFFCFC"/>
+                    <Button x:Name="button_zmiana" Content="Zmień" HorizontalAlignment="Left" Margin="85,244,0,0" VerticalAlignment="Top" Width="64" Click="Button_zmiana_Click" Background="Black" BorderBrush="White" Foreground="White" />
                 </Grid>
             </TabItem>
             <TabItem Header="INFO">
                 <Grid Background="#FF424B56">
-                    <Label x:Name="label_Copy1" Content="autor: WaGaCAD &#xA;wersja: 2018-12-08" HorizontalAlignment="Left" Margin="142,19,0,0" VerticalAlignment="Top" Width="121" Height="41" Foreground="White"/>
+                    <Label x:Name="label_Copy1" Content="autor: WaGaCAD &#xA;wersja: 2018-12-09" HorizontalAlignment="Left" Margin="142,19,0,0" VerticalAlignment="Top" Width="121" Height="41" Foreground="White"/>
                     <Button Content="Strona domowa projektu" BorderThickness="3" Margin="117,74,0,0"  FontSize="10" FontWeight="Bold" Height="36" VerticalAlignment="Top" HorizontalAlignment="Left" Width="157" BorderBrush="White" Foreground="White" Background="#FF292929"/>
                 </Grid>
             </TabItem>

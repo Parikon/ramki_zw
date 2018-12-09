@@ -22,6 +22,6 @@ namespace ramki_zw
             bmp.CacheOption = BitmapCacheOption.OnLoad;
             bmp.EndInit();
             return bmp;
-        }
+        }        
     }
 }
