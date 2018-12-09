@@ -86,11 +86,11 @@ namespace ramki_zw
             czydodaj = true;
             Okno_wyboru win2 = new Okno_wyboru();
             win2.ShowDialog();
-            Odswierz();
+            Odswiez();
 
         }
 
-        private void Odswierz()
+        private void Odswiez()
         {
             var baza = new Base(path);
             DataTable dt = baza.PobierzDaneTabeli(baza.nazwatabeli);
@@ -108,7 +108,7 @@ namespace ramki_zw
                     Okno_wyboru win2 = new Okno_wyboru();
                     win2.Title = "PI 2019 MIT EDITION - Zmień";
                     win2.ShowDialog();
-                    Odswierz();
+                    Odswiez();
                 }
                 else
                 {
