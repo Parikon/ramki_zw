@@ -69,6 +69,28 @@ namespace ramki_zw
             db_con.Close();
         }
 
+        public bool CzyPowtorka(string nazwa, int numerkolumny)
+        {
+            bool buul = false;
+            DataTable dt = PobierzDaneTabeli(nazwatabeli);
+            int wierszy = dt.Rows.Count;
+            DataRow dtr;
+            string pobor;
+            int wynik = 0;
+
+            if (wierszy > 0)
+            {
+                for (int i = 0; i < wierszy; i++)
+                {
+                    dtr = dt.Rows[i];
+                    pobor = dtr[numerkolumny].ToString();
+                    if (pobor == nazwa) wynik = wynik+1;
+                }                
+            }
+            if (wynik != 0) buul = true;
+            return buul;
+        }
+
         public void DodajDaneDoTabeli()
         {
             try

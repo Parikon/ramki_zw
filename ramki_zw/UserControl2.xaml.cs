@@ -62,23 +62,40 @@ namespace ramki_zw
 
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
-            bool results = CzyWszystkoOk();
+            bool results = CzyWszystkoOk();            
             if (results == true)
             {
                 if (UserControl1.czydodaj == true)
                 {
                     //MessageBox.Show("Możesz wstawić metodę dodającą rekord do bazy");
                     var baza = new Base(path);
-                    baza.DodajDaneDoTabeli();
-                    Window.GetWindow(this).Close();
+                    bool results2 = baza.CzyPowtorka(textbox_nazwaformatki.Text, 0);                    
+                    if (results2 == true)
+                    {
+                        MessageBox.Show("Podana nazwa formatki jest już w tabeli", "PI-INFO");
+                    }
+                    else
+                    {
+                        baza.DodajDaneDoTabeli();
+                        Window.GetWindow(this).Close();
+                    }
+                    
                 }
 
                 else
                 {
                    // MessageBox.Show("Możesz wstawić metodę zmieniającą rekord w bazie");
                     var baza = new Base(path);
-                    baza.ZmienDaneWTabeli();
-                    Window.GetWindow(this).Close();
+                    bool results2 = baza.CzyPowtorka(textbox_nazwaformatki.Text, 0);
+                    if (results2 == true & textbox_nazwaformatki.Text != UserControl1.formatka)
+                    {
+                        MessageBox.Show("Podana nazwa formatki jest już w tabeli", "PI-INFO");
+                    }
+                    else
+                    {
+                        baza.ZmienDaneWTabeli();
+                        Window.GetWindow(this).Close();
+                    }
                 }
             }
 
