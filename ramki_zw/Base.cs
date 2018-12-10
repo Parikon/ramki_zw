@@ -33,15 +33,15 @@ namespace ramki_zw
             this.db_con = new SQLiteConnection($"Data Source = {sciezkaBaza}; Version = 3");
         }
 
-        public interface IBase
-        {
-            bool AddBaseIfNotExist();
-            int GetBaseVersion();
-        }
+        //public interface IBase
+       // {
+       //     bool AddBaseIfNotExist();
+       //     int GetBaseVersion();
+        //}
         /// <summary>
         /// Tworzy bazę jeśli nie istnieje i tabelę projekt_lista
         /// </summary>
-        public void AddBaseIfNotExist()
+        public void DodajTabeleJesliNieIstnieje()
         {
 
             if (!Directory.Exists(this.path))
@@ -93,9 +93,8 @@ namespace ramki_zw
             }
         }
 
-        public void UpdateDaneWTabeli()
-        {
-            
+        public void ZmienDaneWTabeli()
+        {            
             this.db_con.Open();
             SQLiteCommand db_cmd = db_con.CreateCommand();
             db_cmd.CommandType = CommandType.Text;
@@ -123,7 +122,7 @@ namespace ramki_zw
             db_con.Close();
         }
 
-        public void GetData()
+        public void SetData()
         {
             db_con.Open();
             SQLiteCommand db_cmd = db_con.CreateCommand();

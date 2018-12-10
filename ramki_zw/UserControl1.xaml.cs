@@ -57,7 +57,7 @@ namespace ramki_zw
                 image_rysuj_ramke.Source = Tools.Konwersja_bitmap_bitmapimage_png(bm);
 
                 var baza = new Base(path);
-                baza.AddBaseIfNotExist();
+                baza.DodajTabeleJesliNieIstnieje();
                 if (baza.GetTableVersion() != 1)
                 {
                     // tutaj dałbym konwerter na starej tabeli na nową, ale narazie nie mamy takiego konwertera więc program tego nie zrobi
@@ -69,8 +69,8 @@ namespace ramki_zw
                 int wierszy = dt.Rows.Count;
                 if (wierszy == 0)
                 {
-                    baza.GetData();
-                    baza.PobierzDaneTabeli(baza.nazwatabeli);
+                    baza.SetData();
+                    dt = baza.PobierzDaneTabeli(baza.nazwatabeli);
                 }
                 dataGrid.ItemsSource = dt.DefaultView;
             }

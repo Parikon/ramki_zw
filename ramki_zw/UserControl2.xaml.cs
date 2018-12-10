@@ -77,7 +77,7 @@ namespace ramki_zw
                 {
                    // MessageBox.Show("Możesz wstawić metodę zmieniającą rekord w bazie");
                     var baza = new Base(path);
-                    baza.UpdateDaneWTabeli();
+                    baza.ZmienDaneWTabeli();
                     Window.GetWindow(this).Close();
                 }
             }
