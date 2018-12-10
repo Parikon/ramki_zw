@@ -69,27 +69,27 @@ namespace ramki_zw
             db_con.Close();
         }
 
-        public bool CzyPowtorka(string nazwa, int numerkolumny)
+        public bool CzyPowtorka(string nazwa)
         {
-            bool buul = false;
-            DataTable dt = PobierzDaneTabeli(nazwatabeli);
-            int wierszy = dt.Rows.Count;
-            DataRow dtr;
-            string pobor;
-            int wynik = 0;
+             
+            bool bull = false;
+            this.db_con.Open();
+            SQLiteCommand db_cmd = db_con.CreateCommand();
+            db_cmd.CommandType = CommandType.Text;
+            db_cmd.CommandText = "select * from  " + nazwatabeli + " where [Format] = '" + nazwa + "'";
+            db_cmd.ExecuteNonQuery();
+            var dt = new DataTable();
+            SQLiteDataAdapter da = new SQLiteDataAdapter(db_cmd);            
+            da.Fill(dt);
+            db_con.Close();
 
-            if (wierszy > 0)
-            {
-                for (int i = 0; i < wierszy; i++)
-                {
-                    dtr = dt.Rows[i];
-                    pobor = dtr[numerkolumny].ToString();
-                    if (pobor == nazwa) wynik = wynik+1;
-                }                
-            }
-            if (wynik != 0) buul = true;
-            return buul;
+            int wierszy = dt.Rows.Count;
+            if (wierszy > 0) bull = true;
+
+            return bull;
         }
+
+        
 
         public void DodajDaneDoTabeli()
         {

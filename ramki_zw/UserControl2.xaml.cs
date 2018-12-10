@@ -69,7 +69,7 @@ namespace ramki_zw
                 {
                     //MessageBox.Show("Możesz wstawić metodę dodającą rekord do bazy");
                     var baza = new Base(path);
-                    bool results2 = baza.CzyPowtorka(textbox_nazwaformatki.Text, 0);                    
+                    bool results2 = baza.CzyPowtorka(textbox_nazwaformatki.Text);                    
                     if (results2 == true)
                     {
                         MessageBox.Show("Podana nazwa formatki jest już w tabeli", "PI-INFO");
@@ -86,7 +86,7 @@ namespace ramki_zw
                 {
                    // MessageBox.Show("Możesz wstawić metodę zmieniającą rekord w bazie");
                     var baza = new Base(path);
-                    bool results2 = baza.CzyPowtorka(textbox_nazwaformatki.Text, 0);
+                    bool results2 = baza.CzyPowtorka(textbox_nazwaformatki.Text);
                     if (results2 == true & textbox_nazwaformatki.Text != UserControl1.formatka)
                     {
                         MessageBox.Show("Podana nazwa formatki jest już w tabeli", "PI-INFO");
