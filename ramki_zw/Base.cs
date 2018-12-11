@@ -76,16 +76,11 @@ namespace ramki_zw
             this.db_con.Open();
             SQLiteCommand db_cmd = db_con.CreateCommand();
             db_cmd.CommandType = CommandType.Text;
-            db_cmd.CommandText = "select * from  " + nazwatabeli + " where [Format] = '" + nazwa + "'";
-            db_cmd.ExecuteNonQuery();
-            var dt = new DataTable();
-            SQLiteDataAdapter da = new SQLiteDataAdapter(db_cmd);            
-            da.Fill(dt);
+            db_cmd.CommandText = "select count() from  " + nazwatabeli + " where [Format] = '" + nazwa + "'";
+            var result = (long)db_cmd.ExecuteScalar();
             db_con.Close();
 
-            int wierszy = dt.Rows.Count;
-            if (wierszy > 0) bull = true;
-
+            if  (result > 0) bull = true;
             return bull;
         }
 
@@ -208,7 +203,8 @@ namespace ramki_zw
             this.db_con.Open();
             SQLiteCommand db_cmd = db_con.CreateCommand();
             db_cmd.CommandType = CommandType.Text;
-            db_cmd.CommandText = "select * from " + nazwa_tabeli + "";
+            //db_cmd.CommandText = "select * from " + nazwa_tabeli + "";
+            db_cmd.CommandText = "select * from " + nazwa_tabeli + " order by [Format] desc";
             db_cmd.ExecuteNonQuery();
             SQLiteDataAdapter da = new SQLiteDataAdapter(db_cmd);
             da.Fill(dt);
