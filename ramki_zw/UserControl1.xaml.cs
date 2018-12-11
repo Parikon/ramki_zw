@@ -15,6 +15,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using zze = ZwSoft.ZwCAD.EditorInput;
+
 namespace ramki_zw
 {
     /// <summary>
@@ -172,6 +174,30 @@ namespace ramki_zw
             else
             {
                 MessageBox.Show("Najpierw wskaż co mam usunąć", "PI-INFO");
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (dataGrid.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Nie wiem jaką ramkę narysować.Wskaż ramkę w tabeli");
+                }
+                else
+                {
+                    Window.GetWindow(this).Close();
+                   
+                    Ramka.Rysuj_ramke();                       
+                    
+                }
+                
+            }
+
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "PI-INFO");
             }
         }
     }

@@ -61,7 +61,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base.cs" />
+    <Compile Include="DrawJiggerGroup.cs" />
     <Compile Include="Okno_wyboru.cs" />
+    <Compile Include="Ramka.cs" />
     <Compile Include="Tools.cs" />
     <Compile Include="Okno_ramki.cs" />
     <Compile Include="Commands.cs" />

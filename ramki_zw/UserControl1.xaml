@@ -22,7 +22,7 @@
                             </LinearGradientBrush>
                         </Label.Foreground>
                     </Label>
-                    <Button x:Name="button" Margin="256,0,0,10" BorderThickness="3" FontWeight="Bold"  HorizontalAlignment="Left" Width="158" Height="51" VerticalAlignment="Bottom" BorderBrush="White" Background="#FF292929" Grid.ColumnSpan="2" >
+                    <Button x:Name="button" Margin="256,0,0,10" BorderThickness="3" FontWeight="Bold"  HorizontalAlignment="Left" Width="158" Height="51" VerticalAlignment="Bottom" BorderBrush="White" Background="#FF292929" Grid.ColumnSpan="2" Click="Button_Click" >
                         <WrapPanel Height="40.435" Width="104.156">
                             <Image x:Name="image_rysuj_ramke" Height="30.768" Width="32.418" Margin="5,3,0,0"/>
                             <Label Content="Rysuj" Height="27.317" Width="41.355" Margin="22,4,0,0 " Foreground="White"/>
