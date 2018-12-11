@@ -19,6 +19,8 @@ namespace ramki_zw
         private SQLiteConnection db_con;
         public string nazwatabeli = "ramki_dane";
         private string nazwatabeliwersja = "wersja_ramkidane";
+        private string[] kolumny = { "Format","Wysokość","Długość","G-marg","D-marg","L-marg","P-marg"};
+
 
 
         /// <summary>
@@ -31,6 +33,7 @@ namespace ramki_zw
             this.path = _path + "\\Bazy";
             string sciezkaBaza = this.path + "\\pi.sqlite";
             this.db_con = new SQLiteConnection($"Data Source = {sciezkaBaza}; Version = 3");
+            
         }
 
         //public interface IBase
@@ -51,7 +54,14 @@ namespace ramki_zw
             this.db_con.Open();
             SQLiteCommand db_cmd = db_con.CreateCommand();
             db_cmd.CommandType = System.Data.CommandType.Text;
-            db_cmd.CommandText = "CREATE TABLE IF NOT EXISTS " + nazwatabeli + " ([Format]  Varchar(50), [Wysokość]  INT, [Długość] INT, [G-marg] INT, [D-marg] INT, [L-marg] INT, [P-marg] INT)";
+            db_cmd.CommandText = "CREATE TABLE IF NOT EXISTS " + nazwatabeli +
+                " (["+ kolumny[0]+ "]  Varchar(50)," +
+                " [" + kolumny[1] + "]  INT," +
+                " [" + kolumny[2] + "] INT," +
+                " [" + kolumny[3] + "] INT," +
+                " [" + kolumny[4] + "] INT," +
+                " [" + kolumny[5] + "] INT," +
+                " [" + kolumny[6] + "] INT)";
             db_cmd.ExecuteNonQuery();
             db_cmd.CommandText = "CREATE TABLE IF NOT EXISTS " + nazwatabeliwersja + " ([Numer wersji]  INT)";
             db_cmd.ExecuteNonQuery();
@@ -64,7 +74,7 @@ namespace ramki_zw
             this.db_con.Open();
             SQLiteCommand db_cmd = db_con.CreateCommand();
             db_cmd.CommandType = CommandType.Text;
-            db_cmd.CommandText = "delete from  " + nazwatabeli + " where [Format] = '" + UserControl1.formatka + "'";
+            db_cmd.CommandText = "delete from  " + nazwatabeli + " where [" + kolumny[0] + "] = '" + UserControl1.formatka + "'";
             db_cmd.ExecuteNonQuery();
             db_con.Close();
         }
@@ -76,7 +86,7 @@ namespace ramki_zw
             this.db_con.Open();
             SQLiteCommand db_cmd = db_con.CreateCommand();
             db_cmd.CommandType = CommandType.Text;
-            db_cmd.CommandText = "select count() from  " + nazwatabeli + " where [Format] = '" + nazwa + "'";
+            db_cmd.CommandText = "select count() from  " + nazwatabeli + " where [" + kolumny[0] + "] = '" + nazwa + "'";
             var result = (long)db_cmd.ExecuteScalar();
             db_con.Close();
 
@@ -111,30 +121,19 @@ namespace ramki_zw
         }
 
         public void ZmienDaneWTabeli()
-        {            
+        {
             this.db_con.Open();
             SQLiteCommand db_cmd = db_con.CreateCommand();
             db_cmd.CommandType = CommandType.Text;
-            string kolumna = "Format";
-            db_cmd.CommandText = "update " + nazwatabeli + " set [" + kolumna + "] = '" + UserControl2.nazwaformatki + "' where [Format] = '" + UserControl1.formatka + "'";
-            db_cmd.ExecuteNonQuery();
-            kolumna = "Wysokość";
-            db_cmd.CommandText = "update " + nazwatabeli + " set [" + kolumna + "] = '" + UserControl2.wysokosc + "' where [Format] = '" + UserControl1.formatka + "'";
-            db_cmd.ExecuteNonQuery();
-            kolumna = "Długość";
-            db_cmd.CommandText = "update " + nazwatabeli + " set [" + kolumna + "] = '" + UserControl2.dlugosc + "' where [Format] = '" + UserControl1.formatka + "'";
-            db_cmd.ExecuteNonQuery();
-            kolumna = "G-marg";
-            db_cmd.CommandText = "update " + nazwatabeli + " set [" + kolumna + "] = '" + UserControl2.G_marg + "' where [Format] = '" + UserControl1.formatka + "'";
-            db_cmd.ExecuteNonQuery();
-            kolumna = "D-marg";
-            db_cmd.CommandText = "update " + nazwatabeli + " set [" + kolumna + "] = '" + UserControl2.D_marg + "' where [Format] = '" + UserControl1.formatka + "'";
-            db_cmd.ExecuteNonQuery();
-            kolumna = "L-marg";
-            db_cmd.CommandText = "update " + nazwatabeli + " set [" + kolumna + "] = '" + UserControl2.L_marg + "' where [Format] = '" + UserControl1.formatka + "'";
-            db_cmd.ExecuteNonQuery();
-            kolumna = "P-marg";
-            db_cmd.CommandText = "update " + nazwatabeli + " set [" + kolumna + "] = '" + UserControl2.P_marg + "' where [Format] = '" + UserControl1.formatka + "'";
+            db_cmd.CommandText = "update " + nazwatabeli + " set " +
+                "[" + kolumny[0] + "]='" + UserControl2.nazwaformatki + "'," +
+                "[" + kolumny[1] + "]='" + UserControl2.wysokosc + "'," +
+                "[" + kolumny[2] + "]='" + UserControl2.dlugosc + "'," +
+                "[" + kolumny[3] + "]='" + UserControl2.G_marg + "'," +
+                "[" + kolumny[4] + "]='" + UserControl2.D_marg + "'," +
+                "[" + kolumny[5] + "]='" + UserControl2.L_marg + "'," +
+                "[" + kolumny[6] + "]='" + UserControl2.P_marg + "' " +
+                "where [" + kolumny[0] + "]='" + UserControl1.formatka + "'";
             db_cmd.ExecuteNonQuery();
             db_con.Close();
         }
@@ -204,7 +203,7 @@ namespace ramki_zw
             SQLiteCommand db_cmd = db_con.CreateCommand();
             db_cmd.CommandType = CommandType.Text;
             //db_cmd.CommandText = "select * from " + nazwa_tabeli + "";
-            db_cmd.CommandText = "select * from " + nazwa_tabeli + " order by [Format] desc";
+            db_cmd.CommandText = "select * from " + nazwa_tabeli + " order by [" + kolumny[0] + "] desc";
             db_cmd.ExecuteNonQuery();
             SQLiteDataAdapter da = new SQLiteDataAdapter(db_cmd);
             da.Fill(dt);
